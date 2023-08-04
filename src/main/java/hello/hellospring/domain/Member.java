@@ -14,6 +14,8 @@ public class Member {
 
     private String example;
 
+    private String example2;
+
     public Long getId() {
         return id;
     }
