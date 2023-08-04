@@ -12,6 +12,8 @@ public class Member {
     @Column(name = "username")
     private String name;
 
+    private String example;
+
     public Long getId() {
         return id;
     }
@@ -26,4 +28,6 @@ public class Member {
     public void setName(String name) {
         this.name = name;
     }
+
+
 }
