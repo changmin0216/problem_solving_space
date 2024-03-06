@@ -1,6 +1,3 @@
-#와인을 안 먹는 경우 dp[i-1]
-#와인을 먹는 경우 wine[i] + wine[i-1] + dp[i-3] or wine[i] + dp[i-2]
-
 import sys
 input = sys.stdin.readline
 
