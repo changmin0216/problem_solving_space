@@ -6,16 +6,16 @@ n, m = map(int, input().split())
 rs = []
 chk = [False] * (n+1)
 
-def recur(num, start):
-    if num == m:
-        print(' '.join(map(str, rs)))
+def recur(start):
+    if len(rs)==m:
+        print(' '.join(map(str, rs))) #print(*rs) --> rs 리스트의 각 요소를 언패킹
         return
     for i in range(start, n+1):
         if chk[i] == False:
             chk[i] = True
             rs.append(i)
-            recur(num+1, i)
+            recur(i)
             chk[i] = False
             rs.pop()
 
-recur(0, 1)
+recur(1)
