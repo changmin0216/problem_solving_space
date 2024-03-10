@@ -39,7 +39,7 @@ while True:
     snake.append((y, x))
     time+=1
 
-    # 시간에 해당하는 방향전환 정보가 있을 경우
+    # 방향을 바꾸는 시간일 때
     if len(direction)!=0:
         if time == direction[0][0]:
             if direction[0][1] == 'D': #오른쪽으로 90
