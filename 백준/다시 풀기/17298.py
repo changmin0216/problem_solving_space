@@ -10,8 +10,9 @@ N = int(input())
 ary = list(map(int, input().split()))
 
 answer = [-1]*N
-stack = [0]
-for i in range(1, N):
+stack=[]
+
+for i in range(N):
     while stack and ary[stack[-1]] < ary[i]:
         answer[stack.pop()] = ary[i]
     stack.append(i)
