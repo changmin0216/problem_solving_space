@@ -1,8 +1,2 @@
-print(ord('0'))
-print(ord('1'))
-print(ord('9'))
-
-
-
-print(ord('A'))
-print(ord('B'))
+for i in range(-2, 0):
+    print(i)
