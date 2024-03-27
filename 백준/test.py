@@ -1,8 +1,5 @@
-n = 0
-while 1:
-    if n>11:
-        print(n)
-        break
-    n+=1
-else:
-    print("ss")
+from itertools import permutations
+
+arr = [i for i in range(1, 4)]
+for v in permutations(arr, 3):
+    print(v)
