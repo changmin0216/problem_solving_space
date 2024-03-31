@@ -1,2 +1,5 @@
-print(1<<1)
-print(1<<0)
+from collections import deque
+
+q = deque([(2, 3)])
+a, b = q.popleft()
+print(a, b)
