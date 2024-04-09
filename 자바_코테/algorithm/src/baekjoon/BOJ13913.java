@@ -21,24 +21,22 @@ public class BOJ13913 {
         }
         else {
             bfs();
-            Stack<Integer> stack = new Stack<>();
-            stack.push(k);
+
+            ArrayList<Integer> answer = new ArrayList<>();
+
+            answer.add(k);
             int index = k;
 
             while (index != n) {
-                stack.push(parent[index]);
+                answer.add(parent[index]);
                 index = parent[index];
             }
 
             System.out.println(visited[k]);
 
-            StringBuilder sb = new StringBuilder();
-
-            while (!stack.isEmpty()) {
-                sb.append(stack.pop() + " ");
-
+            for (int i = answer.size()-1 ; i > -1; i--) {
+                System.out.print(answer.get(i) + " ");
             }
-            System.out.println(sb.toString());
         }
 
     }
@@ -65,7 +63,7 @@ public class BOJ13913 {
                 else if (0 <= next && next < 100001 && visited[next] == 0) {
                     q.add(next);
                     visited[next] = visited[before] + 1;
-                    parent[next] = before;
+
                 }
             }
         }
