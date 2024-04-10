@@ -3,33 +3,45 @@ package programmers;
 import java.util.*;
 
 public class Main {
-    public static int solution(int[][] dots) {
-        int answer = 0;
-        int x1 = dots[0][0];
-        int y1 = dots[0][1];
-        int x2 = dots[1][0];
-        int y2 = dots[1][1];
-        int x3 = dots[2][0];
-        int y3 = dots[2][1];
-        int x4 = dots[3][0];
-        int y4 = dots[3][1];
+    public static int[] solution(String[] genres, int[] plays) { //int[]
+        ArrayList<Integer> answer = new ArrayList<>();
+        HashMap<String, Integer> total = new HashMap<>();
+        HashMap<String, HashMap<Integer, Integer>> music = new HashMap<>();
 
-        double slop1 = (double)(y1-y2) / (double)(x1-x2);
-        double slop2 = (double)(y3-y4) / (double)(x3-x4);
-
-        double slop3 = (double)(y1-y3) / (double)(x1-x3);
-        double slop4 = (double)(y2-y4) / (double)(x2-x4);
-
-        double slop5 = (double)(y1-y4) / (double)(x1-x4);
-        double slop6 = (double)(y2-y3) / (double)(x2-x3);
-
-        if ((slop1 == slop2) || (slop3 == slop4) || (slop5==slop6))  {
-            answer = 1;
+        for (int i = 0; i < genres.length; i++) {
+            if (!total.containsKey(genres[i])) {
+                HashMap<Integer, Integer> map = new HashMap<>();
+                map.put(i, plays[i]);
+                music.put(genres[i], map); //그리고 아이디랑, 재색수 저장
+                total.put(genres[i], plays[i]); //없으면 초기 값으로 plays[i] 값
+            } else {
+                music.get(genres[i]).put(i, plays[i]);
+                total.put(genres[i], plays[i] + total.get(genres[i]));
+            }
         }
 
-        return answer;
+        List<String> total_keySet = new ArrayList<>(total.keySet());
+        Collections.sort(total_keySet, (s1, s2) -> total.get(s2) - (total.get(s1))); //내림차순
+
+        for (String key : total_keySet) {
+            HashMap<Integer, Integer> map = music.get(key);
+            List<Integer> music_keySet = new ArrayList<>(map.keySet());
+            Collections.sort(music_keySet, (s1, s2) -> map.get(s2) - (map.get(s1)));
+
+            answer.add(music_keySet.get(0));
+            if (music_keySet.size() > 1) {
+                answer.add(music_keySet.get(1));
+            }
+        }
+
+        return answer.stream().mapToInt(Integer::intValue).toArray();
     }
     public static void main(String[] args){
-        System.out.println(solution(new int[][]{{1, 4}, {9, 2}, {3, 8}, {11, 6}}));
+        String[] genres = {"classic", "pop", "classic", "classic", "pop"};
+        int[] plays = {500, 600, 150, 800, 2500};
+        int[] solution = solution(genres, plays);
+        for (int v : solution) {
+            System.out.print(v+" ");
+        }
     }
 }
