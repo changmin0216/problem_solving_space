@@ -4,6 +4,20 @@ import java.util.*;
 import java.io.*;
 
 public class BOJ2146 {
+    private static class Node {
+        int y, x, len;
+
+        Node(int y, int x) {
+            this.y = y;
+            this.x = x;
+        }
+
+        Node(int y, int x, int len) {
+            this.y = y;
+            this.x = x;
+            this.len = len;
+        }
+    }
     static int n;
     static int temp = 1;
     static int[][] map;
@@ -121,17 +135,3 @@ public class BOJ2146 {
     }
 }
 
-class Node {
-    int y, x, len;
-
-    Node(int y, int x) {
-        this.y = y;
-        this.x = x;
-    }
-
-    Node(int y, int x, int len) {
-        this.y = y;
-        this.x = x;
-        this.len = len;
-    }
-}

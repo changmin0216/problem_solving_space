@@ -4,6 +4,18 @@ import java.util.*;
 import java.io.*;
 
 public class BOJ14226 {
+    static private class Point {
+        int value;
+        int clip;
+        int time;
+
+        public Point(int value, int clip, int time) {
+            this.value = value;
+            this.clip = clip;
+            this.time = time;
+        }
+    }
+
     static int s;
     static boolean[][] visited = new boolean[1001][1001];
     public static void main(String[] args) throws IOException{
@@ -45,15 +57,5 @@ public class BOJ14226 {
 }
 
 
-class Point {
-    int value;
-    int clip;
-    int time;
 
-    public Point(int value, int clip, int time) {
-        this.value = value;
-        this.clip = clip;
-        this.time = time;
-    }
-}
 
