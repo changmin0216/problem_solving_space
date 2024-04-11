@@ -53,7 +53,9 @@ public class BOJ1261 {
     }
 
     static void bfs(){
-//        Queue<Room> q = new LinkedList<>();
+        PriorityQueue<Integer> queue_1 = new PriorityQueue<>(); //우선순위가 낮은 숫자 순
+        PriorityQueue<Integer> queue_2 = new PriorityQueue<>(Collections.reverseOrder()); //우선순위가 높은 숫자 순
+
         PriorityQueue<Room> q = new PriorityQueue<>();
 
         q.add(new Room(1, 1, 0));
