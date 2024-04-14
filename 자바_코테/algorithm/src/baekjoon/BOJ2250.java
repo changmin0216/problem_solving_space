@@ -10,7 +10,7 @@ public class BOJ2250 {
         int right;
         int parent;
 
-        public Node(int value, int left, int right, int parent) {
+        public Node(int parent, int value, int left, int right) {
             this.value = value;
             this.left = left;
             this.right = right;
@@ -23,7 +23,7 @@ public class BOJ2250 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
-        int n = Integer.parseInt(br.readLine());
+        n = Integer.parseInt(br.readLine());
         tree = new Node[n+1];
         levelMax = new int[n + 1];
         levelMin = new int[n + 1];
@@ -33,7 +33,6 @@ public class BOJ2250 {
             levelMax[i] = 0;
             levelMin[i] = n;
         }
-
 
         for (int i = 0; i < n; i++) {
             st = new StringTokenizer(br.readLine());
