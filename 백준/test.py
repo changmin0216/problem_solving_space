@@ -1,5 +1,3 @@
-from collections import deque
 
-q = deque([(2, 3)])
-a, b = q.popleft()
-print(a, b)
+for i in range(5, 3, -1):
+    print(i)
