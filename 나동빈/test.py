@@ -1,17 +1,10 @@
-def binary_search(array, target, start, end):
-    while start <= end:
-        mid = (start + end) // 2
+d = [0]*100
 
-        if array[mid] == target:
-            return mid
-        elif array[mid] > target:
-            end = mid - 1
-        else:
-            start = mid + 1
-    return None
+d[1] = 1
+d[2] = 1
+n=99
 
-n, target = map(int, input().split())
-array = list(map(int, input().split()))
+for i in range(3, n+1):
+    d[i] = d[i-1] + d[i-2]
 
-result = binary_search(array, target, 0, len(array) - 1)
-print(result+1)
+print(d[99])
