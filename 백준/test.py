@@ -1,6 +1,4 @@
 from collections import deque
 
-q = deque()
-q.append((0,0))
-y, x = q.popleft()
-print(y, x)
+for i in range(3, 3):
+    print(i)
