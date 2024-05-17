@@ -6,7 +6,6 @@ target = 1
 for x in data:
     if x > target:
         break
-    else:
-        target+=x
+    target+=x
 
 print(target)
