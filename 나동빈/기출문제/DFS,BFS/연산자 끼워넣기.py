@@ -9,10 +9,12 @@ op = list(map(int, input().split()))
 
 op_r = []
 for i in range(4):
+
     if i==0:
         for _ in range(op[i]):
             op_r.append('+')
-    elif i==1:
+
+    elif i==1: 
         for _ in range(op[i]):
             op_r.append('-')
 
