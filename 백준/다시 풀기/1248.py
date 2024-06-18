@@ -9,6 +9,7 @@ v = []
 
 def possible(idx):
     s = 0
+
     for i in range(idx, -1, -1):
         s+=v[i]
         if sign[i][idx] == '+' and s<=0:
