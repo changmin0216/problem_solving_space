@@ -14,7 +14,7 @@ for i in range(n):
 
 dx = [0,0,-1,1]
 dy = [-1,1,0,0]
-def check_safe(corridor):
+def check_safety(corridor):
 
     for x in teacher:
 
