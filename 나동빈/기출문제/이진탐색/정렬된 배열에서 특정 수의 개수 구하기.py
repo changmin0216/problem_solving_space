@@ -5,7 +5,7 @@ N, x = map(int, input().split())
 arr = list(map(int, input().split()))
 
 left = 0
-right = len(arr) - 1
+right = N - 1
 
 cnt = 0
 
@@ -34,6 +34,7 @@ def last(array, target, start, end):
             last_index = mid
             start = mid + 1
     return last_index
+
 first_index = first(arr, x, left, right)
 last_index = last(arr, x, left, right)
 
