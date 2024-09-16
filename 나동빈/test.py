@@ -1,23 +1,31 @@
-import sys
-input = sys.stdin.readline
+from collections import deque
 
-n = int(input())
-nums = list(map(int, input().split()))
-add, sub, mul, div = map(int, input().split())
-result = []
-ans = 0
-def cal(add, sub, mul, div, ans, i):
-    if i == n:
-        result.append(ans)
-        return
-    if add>0:
-        cal(add-1, sub, mul, div, ans+nums[i], i+1)
-    if sub>0:
-        cal(add, sub-1, mul, div, ans-nums[i], i+1)
-    if mul>0:
-        cal(add, sub, mul-1, div, ans*nums[i], i+1)
-    if div>0:
-        cal(add, sub, mul, div-1, int(ans/nums[i]), i+1)
-cal(add, sub, mul, div,  nums[0], 1)
-print(max(result))
-print(min(result))
+v, e = map(int, input().split())
+indegree = [0] * (v+1)
+graph = [[] for i in range(v+1)]
+
+for _ in range(e):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    indegree[b]+=1
+
+def topology_sort():
+    result = []
+    q = deque()
+
+    for i in range(1, v+1):
+        if indegree[i] == 0:
+            q.append(i)
+
+    while q:
+        now = q.popleft()
+        result.append(now)
+        for i in graph[now]:
+            indegree[i]-=1
+            if indegree[i] == 0:
+                q.append(i)
+
+    for i in result:
+        print(i, end=' ')
+
+topology_sort()
