@@ -1,6 +1,10 @@
-arr = [1, 2, 3]
+from collections import deque
 
-for i in range(4, 10):
-    arr.append(i)
-    print(arr)
-    arr.pop()
+q = deque()
+
+q.append('I')
+q.append('O')
+q.append('I')
+
+if ''.join(q)=='IOI':
+    print('YES')

@@ -5,7 +5,7 @@
       <excludeFolder url="file://$MODULE_DIR$/소프티어_코테" />
       <excludeFolder url="file://$MODULE_DIR$/자바_코테/algorithm/out" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.12 (problem_solving_space) (2)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>
