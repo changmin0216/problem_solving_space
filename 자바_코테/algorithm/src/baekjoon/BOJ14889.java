@@ -22,7 +22,7 @@ public class BOJ14889 {
         recur(new ArrayList<>(), 0);
         System.out.println(Collections.min(result));
     }
-    static void recur(ArrayList<Integer> tmp, int index){
+    private static void recur(ArrayList<Integer> tmp, int index){
         if (tmp.size() == n / 2) {
             boolean[] visited = new boolean[n];
             for (int num: tmp){
