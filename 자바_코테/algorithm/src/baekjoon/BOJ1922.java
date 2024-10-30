@@ -4,82 +4,57 @@ import java.util.*;
 import java.io.*;
 
 public class BOJ1922 {
-    static class Edge implements Comparable<Edge>{
-        int start;
-        int end;
-        int weight;
-
-        public Edge(int start, int end, int weight) {
-            this.start = start;
-            this.end = end;
-            this.weight = weight;
-        }
-
-        @Override
-        public int compareTo(Edge o){
-            return weight - o.weight;  //비교할 대상이 더 클때 순서를 빠구지 않는다.(오름차순)
-        }
-    }
-
+    static ArrayList<int[]> edges;
+    static int n;
+    static int m;
+    static int result = 0;
     static int[] parent;
-    static ArrayList<Edge> edgeList;
-
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+        n = Integer.parseInt(br.readLine());
+        m = Integer.parseInt(br.readLine());
 
-        int N = Integer.parseInt(br.readLine());
-        int M = Integer.parseInt(br.readLine());
-        edgeList = new ArrayList<>();
-        for (int i = 0; i < M; i++) {
-            st = new StringTokenizer(br.readLine());
-            int start = Integer.parseInt(st.nextToken());
-            int end = Integer.parseInt(st.nextToken());
-            int weight = Integer.parseInt(st.nextToken());
-
-            edgeList.add(new Edge(start, end, weight));
+        edges = new ArrayList<>();
+        for (int i = 0; i < m; i++) {
+            String[] s = br.readLine().split(" ");
+            int[] tmp = {Integer.parseInt(s[0]), Integer.parseInt(s[1]), Integer.parseInt(s[2])};
+            edges.add(tmp);
         }
+        edges.sort((o1, o2) -> {
+            return o1[2]-o2[2]; //양수 반환 --> 순서 바꿈
+        });
 
-        parent = new int[N + 1];
-        for (int i = 1; i <= N; i++) {
+        parent = new int[n + 1];
+        for (int i = 0; i < n + 1; i++) {
             parent[i] = i;
         }
-
-        Collections.sort(edgeList);
-
-        int answer= 0;
-        for (int i = 0; i < edgeList.size(); i++) {
-            Edge edge = edgeList.get(i);
-
-            //사이클을 발생하는 간선은 제외(부모를 찾아서 비교)
-            if (find(edge.start) != find(edge.end)) {
-                answer += edge.weight;
-                union(edge.start, edge.end);
+        for (int i = 0; i < m; i++) {
+            int[] tmp = edges.get(i);
+            if (find_parent(parent, tmp[0]) != find_parent(parent, tmp[1])) {
+                result += tmp[2];
+                union_parent(parent, tmp[0], tmp[1]);
             }
         }
-        System.out.println(answer);
-        br.close();
+        System.out.println(result);
     }
 
-    public static int find(int x) {
-        if (x == parent[x]) {
-            return x;
+    static private int find_parent(int[] parent, int x) {
+        if (parent[x] != x) {
+            parent[x] = find_parent(parent, parent[x]);
         }
-
-        return parent[x] = find(parent[x]);
+        return parent[x];
     }
 
-    public static void union(int x, int y) {
-        x = find(x);
-        y = find(y);
+    static private void union_parent(int[] parent, int a, int b) {
+        a = find_parent(parent, a);
+        b = find_parent(parent, b);
 
-        if (x != y) {
-            if (x < y) {
-                parent[y] = x;
-            }
-            else{
-                parent[x] = y;
-            }
+        if (a < b) {
+            parent[b] = a;
+        }
+        else {
+            parent[a] = b;
         }
     }
+
 }
