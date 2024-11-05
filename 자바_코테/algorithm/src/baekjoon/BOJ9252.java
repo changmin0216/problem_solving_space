@@ -20,12 +20,6 @@ public class BOJ9252 {
                 }
             }
         }
-//        System.out.println(Arrays.toString(dp[0]));
-//        Arrays.fill(dp[0], -1);
-//        System.out.println(Arrays.toString(dp[0]));
-//        for (int i = 0; i < str1.length() + 1; i++) {
-//            System.out.println(Arrays.toString(dp[i]));
-//        }
 
         StringBuilder sb = new StringBuilder();
 
