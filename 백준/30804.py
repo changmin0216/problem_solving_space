@@ -17,6 +17,7 @@ while e < n:
         fruit_cnt[arr[s]]-=1
         if fruit_cnt[arr[s]] == 0:
             del fruit_cnt[arr[s]]
+
         s+=1
 
     result = max(result, e-s+1)
