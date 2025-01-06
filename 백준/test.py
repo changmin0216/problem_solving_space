@@ -1,10 +1,20 @@
-from collections import deque
+import sys
+input = sys.stdin.readline
+def recur(n):
+  if n==1:
+    return ['*']
 
-q = deque()
+  arr=recur(n//3)
+  list_=[]
 
-q.append('I')
-q.append('O')
-q.append('I')
+  for x in arr:
+    list_.append(x*3)
+  for x in arr:
+    list_.append(x+' '*(n//3)+x)
+  for x in arr:
+    list_.append(x*3)
 
-if ''.join(q)=='IOI':
-    print('YES')
+  return list_
+
+n=int(input())
+print('\n'.join(recur(n)))
