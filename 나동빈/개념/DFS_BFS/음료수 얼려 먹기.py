@@ -1,34 +1,35 @@
 import sys
+from collections import deque
 input = sys.stdin.readline
 
 n, m = map(int, input().split())
-map_ = []
-visited = [[False for _ in range(m)] for _ in range(n)]
 
+graph = []
 for _ in range(n):
-    map_.append(list(map(int, input().rstrip())))
+    graph.append(list(map(int, input().rstrip())))
 
-dx = [0, 0, -1, 1]
-dy = [-1, 1, 0, 0]
-def dfs_recursive(y, x):
-    for i in range(4):
-        ny = y + dy[i]
-        nx = x + dx[i]
+dy = [-1,1,0,0]
+dx = [0,0,-1,1]
+def bfs(y, x):
+    q = deque()
+    q.append((y, x))
 
-        if 0<=ny<n and 0<=nx<m and visited[ny][nx] == False:
-            if map_[ny][nx] == 0:
-                visited[ny][nx] = True
-                dfs_recursive(ny, nx)
-    return
+    while q:
+        ey, ex = q.popleft()
 
-result = 0
+        for i in range(4):
+            ny, nx = ey + dy[i], ex + dx[i]
+
+            if 0<=ny<n and 0<=nx<m:
+                if graph[ny][nx] == 0:
+                    graph[ny][nx] = 1
+                    q.append((ny, nx))
+
+answer = 0
 for i in range(n):
     for j in range(m):
-        if map_[i][j] == 0 and visited[i][j]==False:
-            visited[i][j] = True
-            dfs_recursive(i, j)
-            result+=1
-
-print(result)
-
+        if graph[i][j] == 0:
+            bfs(i, j)
+            answer+=1
+print(answer)
 
