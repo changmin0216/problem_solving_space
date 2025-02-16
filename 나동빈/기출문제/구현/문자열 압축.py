@@ -1,10 +1,8 @@
 def solution(s):
-    answer = 0
     result = []
-    for i in range(1, len(s)+1): #1부터 len까지 자를 수 있으니
+    for i in range(1, len(s)//2+1):
         cnt=1
         temp = ""
-
         for j in range(0, len(s), i):
             if s[j:j+i] == s[j+i:j+i+i]:
                 cnt+=1
@@ -13,12 +11,11 @@ def solution(s):
                     temp += str(cnt) + s[j:j+i]
                     cnt = 1
                 else: ## 이전에 반복 되는게 없으면
-                    if i==1:
-                        temp += s[j:j+i]
-                    else:
-                        temp += s[j:j+i]
+                    temp += s[j:j+i]
         result.append(len(temp))
-    answer = min(result)
+    if result:
+        answer = min(result)
+    else:
+        answer = len(s)
     return answer
-
-print(solution("xababcdcdababcdcd"))
+print(solution('aaa'))
