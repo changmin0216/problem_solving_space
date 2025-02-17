@@ -4,31 +4,28 @@ input = sys.stdin.readline
 
 n, m = map(int, input().split())
 
-map_ = []
+maze = []
 for _ in range(n):
-    map_.append(list(map(int, input().rstrip())))
+    maze.append(list(map(int, input().rstrip())))
 
-dx = [0,0,-1,1]
 dy = [-1,1,0,0]
+dx = [0,0,-1,1]
+def bfs():
+    q = deque()
+    q.append((0,0,1))
 
-q = deque()
-q.append((0,0))
+    visited = [[False]*m for _ in range(n)]
+    visited[0][0] = True
 
-while q:
-    ey, ex = q.popleft()
-
-    for i in range(4):
-        ny = ey + dy[i]
-        nx = ex + dx[i]
-
-        if ny < 0 or ny >= n or nx < 0 or nx >= m:
-            continue
-
-        if map_[ny][nx] == 0:
-            continue
-
-        if map_[ny][nx] == 1:
-            map_[ny][nx] = map_[ey][ex]+1
-            q.append((ny, nx))
-
-print(map_[n-1][m-1])
+    while q:
+        ey, ex, dist = q.popleft()
+        if ey == n-1 and ex == m-1:
+            print(dist)
+            return
+        for i in range(4):
+            ny, nx = ey + dy[i], ex + dx[i]
+            if 0<=ny<n and 0<=nx<m and not visited[ny][nx]:
+                if maze[ny][nx]==1:
+                    visited[ny][nx] = True
+                    q.append((ny, nx, dist+1))
+bfs()
