@@ -1,43 +1,38 @@
 import sys
-input = sys.stdin.readline
 import heapq
-
+input = sys.stdin.readline
 INF = int(1e9)
 
 n, m = map(int, input().split())
-graph = [[] for _ in range(n+1)]
 
+graph = [[] for _ in range(n+1)]
 for _ in range(m):
     a, b = map(int, input().split())
-    graph[a].append(b)
-    graph[b].append(a)
+    graph[a].append((b, 1))
+    graph[b].append((a, 1))
 
-distance = [INF for _ in range(n+1)]
+distance = [INF] * (n+1)
 
 distance[1] = 0
 
-def dijkstra(start):
-    q = []
-    heapq.heappush(q, (0,1))
+q = []
+heapq.heappush(q, (1, 0))
 
-    while q:
-        dist, node = heapq.heappop(q)
+while q:
+    now, dist = heapq.heappop(q)
 
-        if distance[node] < dist:
-            continue
+    if distance[now] < dist:
+        continue
 
-        for i in graph[node]:
-            cost = dist + 1
+    for i in graph[now]:
+        cost = dist + i[1]
+        if distance[i[0]] > cost:
+            distance[i[0]] = cost
+            heapq.heappush(q, (i[0], cost))
 
-            if cost < distance[i]:
-                distance[i] = cost
-                heapq.heappush(q, (cost, i))
-dijkstra(1)
-
-max = 0
-max_index = -1
+max_ = -1
 for i in range(1, n+1):
-    if max < distance[i]:
-        max = distance[i]
-        max_index = i
-print(max_index, distance[max_index], distance.count(distance[max_index]))
+    if distance[i]!=INF:
+        if distance[i] > max_:
+            max_ = distance[i]
+print(distance.index(max_), max_, distance.count(max_))
