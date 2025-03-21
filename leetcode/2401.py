@@ -2,7 +2,7 @@ class Solution(object):
     def longestNiceSubarray(self, nums):
         ans = j = mask = 0
         for i, x in enumerate(nums):
-            while mask & x:
+            while mask & x: # 나는 and 연산한 값이 0인 얘들을 원한다.
                 mask ^= nums[j]
                 j += 1
             ans = max(ans, i - j + 1)
