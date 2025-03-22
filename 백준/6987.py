@@ -26,7 +26,6 @@ def dfs(depth):
             res[g1][x] += 1
             res[g2][y] += 1
 
-
 answers = []
 games = list(combinations(range(6), 2))
 
