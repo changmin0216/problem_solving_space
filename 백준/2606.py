@@ -1,32 +1,25 @@
-import sys
-input = sys.stdin.readline
-from collections import deque
-
 n = int(input())
-k = int(input())
+m = int(input())
 
-g = [[] for _ in range(n+1)]
-chk = [False] * (n+1)
+graph = [[] for _ in range(n+1)]
 
-for i in range(1, k+1):
-    x, y = map(int, input().split())
-    g[x].append(y)
-    g[y].append(x)
+for _ in range(m):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
+
+visited = [False] * (n+1)
+def dfs(num):
+    visited[num] = True
+
+    for i in graph[num]:
+        if not visited[i]:
+            dfs(i)
+
+dfs(1)
 
 result = 0
-def bfs(graph, start, visited):
-    global result
-    queue = deque([start])
-    visited[start] = True
-    while queue:
-        v = queue.popleft()
-        for i in graph[v]:
-            if visited[i] == False:
-                queue.append(i)
-                visited[i] = True
-                result+=1
-
-bfs(g, 1, chk)
-
-print(result)
-
+for i in range(n+1):
+    if visited[i]:
+        result+=1
+print(result-1)
