@@ -1,71 +1,85 @@
-import sys
 from collections import deque
-input = sys.stdin.readline
-INF = int(1e9)
 
-n = int(input())
+N = int(input())
+
+fish = []
+shark_size = 2
+shark_y, shark_x = 0,0
+eating_cnt = 0
+
 graph = []
+for i in range(N):
+    list_ = list(map(int, input().split()))
+    for j in range(N):
+        if list_[j]!=0:
+            if list_[j] == 9:
+                shark_y, shark_x = i, j
+                list_[j] = 0 ## 아기 상어 원래 위치 0으로
+            else:
+                fish.append((i, j, list_[j]))
+    graph.append(list_)
 
-now_y, now_x = 0,0
-size = 2 # 현재 상어 크기
-for i in range(n):
-    t = list(map(int, input().split()))
-    for j in range(n):
-        if t[j] == 9:
-            now_y, now_x = i, j
-            t[j] = 0
-    graph.append(t)
-
-dx = [-1,0,1,0]
-dy = [0,1,0,-1]
-
+# 상 좌 우 하
+dy = [-1, 0, 0, 1]
+dx = [0, -1, 1, 0]
 def bfs():
-    # 값이 -1이라면 도달할 수 없다는 의미(초기화)
-    dist = [[-1]*n for _ in range(n)]
-    # 시작 위치는 도달이 가능하다고 보며 거리는 0
-    q = deque([(now_y, now_x)])
-    dist[now_y][now_x] = 0
+    global shark_size, shark_y, shark_x, eating_cnt
 
+    q = deque()
+    q.append((shark_y, shark_x, 0))
+
+    visited = [[False]*N for _ in range(N)]
+    visited[shark_y][shark_x] = True
+
+    candidate = []
     while q:
-        ey, ex = q.popleft()
+        ey, ex, time = q.popleft()
+
+        if 0<graph[ey][ex]<shark_size:
+            candidate.append((ey, ex, time))
+
         for i in range(4):
             ny, nx = ey + dy[i], ex + dx[i]
 
-            if 0<=ny<n and 0<=nx<n:
-                if dist[ny][nx] == -1 and graph[ny][nx] <= size:
-                    dist[ny][nx] = dist[ey][ex] + 1
-                    q.append((ny, nx))
-    return dist
+            if 0<=ny<N and 0<=nx<N:
+                if not visited[ny][nx]:
+                    if graph[ny][nx] <= shark_size: ##나 보다 작거나 같은 경우 통과 가능
+                        visited[ny][nx] = True
+                        q.append((ny, nx, time+1))
 
-def find(dist):
-    y, x = 0, 0
-    min_dist = INF
-    for i in range(n):
-        for j in range(n):
-            # 도달이 가능하면서 먹을 수 있는 물고기일 때
-            if dist[i][j]!=-1 and 1<=graph[i][j] and graph[i][j]<size:
-                # 가장 가까운 물고기 1마리만 선택
-                if dist[i][j] < min_dist:
-                    y, x = i, j
-                    min_dist = dist[i][j]
-    if min_dist == INF:
-        return None
-    else:
-        return y, x, min_dist
+    if not candidate:
+        return -1
 
-result = 0
-ate = 0
+    candidate.sort(key = lambda x:(x[2], x[0], x[1]))
 
-while True:
-    value = find(bfs())
-    if value is None:
-        print(result)
+    y, x, time = candidate[0]
+
+    eating_cnt+=1
+    if eating_cnt == shark_size:
+        shark_size += 1
+        eating_cnt = 0
+    shark_y, shark_x = y, x
+
+    fish.remove((y,x,graph[y][x]))
+
+    graph[y][x] = 0
+
+    return time
+
+def check():
+    if len(fish) == 0:
+        return False
+
+    for i in range(len(fish)):
+        if fish[i][2]<shark_size:
+            return True
+
+    return False
+
+cnt = 0
+while check():
+    time_ = bfs()
+    if time_==-1:
         break
-    else:
-        now_y, now_x = value[0], value[1],
-        result+=value[2]
-        graph[now_y][now_x] = 0
-        ate+=1
-        if ate>=size:
-            size+=1
-            ate=0
+    cnt+=time_
+print(cnt)
