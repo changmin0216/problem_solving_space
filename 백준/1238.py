@@ -12,6 +12,7 @@ for _ in range(m):
 def dijkstra(start):
     distance = [INF] * (n+1)
     distance[start] = 0
+
     q = []
     heapq.heappush(q, (0, start))
 
