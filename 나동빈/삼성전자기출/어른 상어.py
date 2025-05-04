@@ -14,6 +14,7 @@ for i in range(m):
 
 v = [[[0,0]] * n for _ in range(n)]
 
+
 shark = [] ## [i, j, num, d]
 for i in range(n):
     for j in range(n):
