@@ -9,6 +9,7 @@ if n < 4:
     for i in range(2, n+1):
         dp[i] = 1
     print(dp[n])
+
 else:
     dp[2] = 1
     dp[3] = 1
