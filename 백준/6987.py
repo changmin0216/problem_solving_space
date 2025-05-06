@@ -5,7 +5,6 @@ from itertools import combinations
 
 def dfs(depth):
     global cnt
-
     if depth == 15:
         cnt = 1
         for sub in res:
