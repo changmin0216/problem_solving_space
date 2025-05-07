@@ -1,18 +1,20 @@
-import sys
+import sys, heapq
 input = sys.stdin.readline
 
 ## 1<=n<=1500
 n = int(input())
 
-l = []
+heap = []
 
-graph = []
 for _ in range(n):
-    tmp = list(map(int, input().split()))
-    graph.append(tmp)
+    l = list(map(int, input().split()))
+    if len(heap) == 0:
+        for num in l:
+            heapq.heappush(heap, num)
+    else:
+        for num in l:
+            if heap[0] < num:
+                heapq.heappush(heap, num)
+                heapq.heappop(heap)
 
-    for i in tmp:
-        l.append(i)
-
-l.sort()
-print(l[-n])
+print(heap[0])
