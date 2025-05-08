@@ -11,6 +11,7 @@ while(1):
         if m==0:
             break
         answer+=ary[-1]
+
         m-=1
     if m==0:
         break
