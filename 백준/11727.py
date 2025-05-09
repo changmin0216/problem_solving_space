@@ -1,14 +1,31 @@
 import sys
 input = sys.stdin.readline
 
-n = int(input())
+def dfs(node):
+    visited[node] = True
 
-if n==1:
-    print(1)
-else:
-    dp = [0]*(n+1)
-    dp[1] = 1
-    dp[2] = 3
-    for i in range(3, n+1):
-        dp[i] = dp[i-1] + 2*(dp[i-2])
-    print(dp[n]%10007)
+    for i in graph[node]:
+        if not visited[i]:
+            dfs(i)
+
+    return
+
+##############################
+n, m = map(int, input().split())
+
+graph = [[] for _ in range(n+1)]
+for _ in range(m):
+    a, b = map(int, input().split())
+
+    graph[a].append(b)
+    graph[b].append(a)
+
+visited = [False] * (n+1)
+
+result = 0
+for i in range(1, n+1):
+    if not visited[i]:
+        dfs(i)
+        result+=1
+
+print(result)

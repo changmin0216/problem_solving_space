@@ -7,6 +7,7 @@ def dfs(node, cnt):
     for i in graph[node]:
         if not visited[i]:
             cnt = dfs(i, cnt+1)
+
     return cnt
 
 t = int(input())
