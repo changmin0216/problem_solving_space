@@ -13,7 +13,6 @@ def dfs(y, x):
         if 0<=ny<n and 0<=nx<m and graph[ny][nx] == 1 and not visited[ny][nx]:
             dfs(ny, nx)
     return
-
 #############################
 t = int(input())
 
