@@ -1,45 +1,50 @@
 import sys
 input = sys.stdin.readline
-sys.setrecursionlimit(100000)
+
+dy = [1,-1,0,0]
+dx = [0,0,-1,1]
+def dfs(y, x, h):
+    visited[y][x] = True
+
+    for i in range(4):
+        ny, nx = y + dy[i], x + dx[i]
+
+        if 0<=ny<n and 0<=nx<n:
+            if not visited[ny][nx] and graph[ny][nx] < h:
+                dfs(y, x, h)
+
+def solution(h):
+    result = 0
+
+    for i in range(n):
+        for j in range(n):
+            if not visited[i][j] and graph < h:
+                dfs(i, j, h)
+                result+=1
+
+    return result
+
+########################
 n = int(input())
 
 graph = []
 for _ in range(n):
     graph.append(list(map(int, input().split())))
 
-visited = [[False for _ in range(n)] for _ in range(n)]
+min_num = sys.maxsize
+max_num = -1
 
-dx = [0,0,-1,1]
-dy = [-1,1,0,0]
-def dfs(y, x, k):
+for i in graph:
+    min_ = min(i)
+    max_ = max(i)
 
-    for i in range(4):
-        ny = y + dy[i]
-        nx = x + dx[i]
+    if min_ < min_num:
+        min_num = min_
 
-        if 0 > ny or ny >= n or 0 > nx or nx >= n:
-            continue
+    if max_ > max_num:
+        max_num = max_
 
-        if visited[ny][nx] == True:
-            continue
 
-        if graph[ny][nx]<=k:
-            continue
-
-        visited[ny][nx] = True
-        dfs(ny, nx, k)
-    return
-
-max = 0
-for k in range(0, 101):
-    result = 0
-    visited = [[False for _ in range(n)] for _ in range(n)]
-    for i in range(n):
-        for j in range(n):
-            if graph[i][j]>k and visited[i][j]==False:
-                visited[i][j]=True
-                dfs(i, j, k)
-                result+=1
-    if max < result:
-        max = result
-print(max)
+for h in (min_num, max_num+1):
+    visited = [[False] * n for _ in range(n)]
+    solution(h)
