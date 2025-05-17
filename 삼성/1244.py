@@ -1,29 +1,27 @@
-import sys
-input = sys.stdin.readline
-def recur(depth):
-    global max_num
-    if depth == r:
-        tmp = int(''.join(map(str, arr)))
-        max_num = max(max_num, tmp)
+def dfs(num : str, n : int) -> None:
+    global answer
+    if n==0:
+        answer = max(answer, int(num))
         return
 
-    for i in range(len(arr)-1):
-        for j in range(i+1, len(arr)):
-            arr[i], arr[j] = arr[j], arr[i]
-            tmp = int(''.join(map(str, arr)))
-            if (tmp, depth+1) not in visited:
-                recur(depth+1)
-                visited.append((tmp, depth+1))
-            arr[i], arr[j] = arr[j], arr[i]
+    if (int(num), n) in set_:
+        return
+    set_.add((int(num), n))
+    num_list = list(num)
+    for i in range(len(num_list)-1):
+        for j in range(i+1, len(num_list)):
+            num_list[i], num_list[j] = num_list[j], num_list[i]
+            dfs(''.join(num_list), n-1)
+            num_list[j], num_list[i] = num_list[i], num_list[j]
 
+############################
+### 최대 자릿수는 6자리이며, 최대 교환 횟수는 10번이다.
 t = int(input())
 
 for i in range(t):
-    num, r = map(int, input().split())
-    arr = list(map(int, str(num)))
+    num, cnt = map(str, input().split())
 
-    max_num = -1
-
-    visited = []
-    recur(0)
-    print(f'#{i+1}', max_num)
+    answer = -1
+    set_ = set()
+    dfs(num, int(cnt))
+    print(f'#{i+1} {answer}')
