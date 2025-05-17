@@ -1,14 +1,15 @@
-for i in range(10):
-    k = int(input())
-
+for case in range(1, 11):
+    n = int(input())
     arr = list(map(int, input().split()))
-    for _ in range(k):
+
+    for _ in range(n):
+
         max_index = arr.index(max(arr))
         min_index = arr.index(min(arr))
 
-        if arr[max_index] - arr[min_index] <= 1:
-            break
-        arr[max_index] = arr[max_index]-1
-        arr[min_index] = arr[min_index]+1
-    print(f'#{i+1}', end=' ')
-    print(max(arr) - min(arr))
+        arr[max_index]-=1
+        arr[min_index]+=1
+
+    result = max(arr)-min(arr)
+
+    print(f'#{case} {result}')
