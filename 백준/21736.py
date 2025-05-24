@@ -15,8 +15,10 @@ for i in range(n):
     g.append(tmp)
 
 visited = [[False]*m for _ in range(n)]
+
 dy = [-1,1,0,0]
 dx = [0,0,-1,1]
+
 def bfs(y, x):
     cnt = 0
     q = deque()
