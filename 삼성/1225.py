@@ -7,11 +7,13 @@ for _ in range(10):
     q = deque(arr)
 
     while True:
+
         for i in range(1, 6):
             q.append(q.popleft() - i)
             if q[-1] <= 0:
                 q[-1] = 0
                 break
+
         else: # break 안하면
             continue
         break
