@@ -1,34 +1,38 @@
-import sys
+import sys, copy
 from collections import deque
 input = sys.stdin.readline
 
-N = int(input())
+n = int(input())
 
-time = []
+indegree = [0] * (n+1)
 
-graph = [[] for _ in range(N+1)]
+graph = [[] for _ in range(n+1)]
+time = [0]
+for k in range(n):
+    tmp = list(map(int, input().split()))
+    time.append(tmp[0])
+    for i in range(1, len(tmp)-1):
+        indegree[k+1]+=1
+        graph[tmp[i]].append(k+1)
 
-indegree = [0] * (N+1)
+def topology_sort():
+    result = copy.deepcopy(time)
+    q = deque()
 
-for i in range(N):
-    a = list(map(int, input().split()))
+    for i in range(1, n+1):
+        if indegree[i] == 0:
+            q.append(i)
 
-    time.append(a[0]) ##각 강의의 시간
+    while q:
+        now = q.popleft()
 
-    for j in range(1, len(a)-1):
-        graph[a[j]].append(i+1)
-        indegree[i+1]+=1
+        for i in graph[now]:
+            result[i] = max(result[i], result[now]+time[i])
+            indegree[i]-=1
+            if indegree[i] == 0:
+                q.append(i)
 
-q = deque()
+    for i in range(1, n+1):
+        print(result[i])
 
-for i in range(1, len(indegree)):
-    if indegree[i] == 0:
-        q.append((i, time[i-1]))
-
-while q:
-    now, t, = q.popleft()
-    print(t)
-    for i in graph[now]:
-        indegree[i]-=1
-        if indegree[i]==0:
-            q.append((i, time[i-1]+t))
+topology_sort()
