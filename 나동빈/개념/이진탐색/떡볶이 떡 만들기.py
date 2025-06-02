@@ -2,23 +2,24 @@ import sys
 input = sys.stdin.readline
 
 n, m = map(int, input().split())
-rice_cake = list(map(int, input().split()))
+arr = list(map(int, input().split()))
 
 left = 0
-right = max(rice_cake)
+right = max(arr)
+answer = -1
+while left<=right:
+    mid = (left + right) // 2
 
-result=0
-while left <= right:
-    mid = (left+right) // 2
+    sum_ = 0
+    for i in arr:
+        h = i - mid
+        if h>0:
+            sum_+=h
 
-    sum=0
-    for i in range(n):
-        if rice_cake[i] > mid:
-            sum+=rice_cake[i] - mid
-
-    if sum < m:
-        right = mid - 1
-    else:
-        result = mid
+    if sum_>=m:
+        answer = mid
         left = mid + 1
-print(result)
+    else: ## sum_<m
+        right = mid - 1
+
+print(answer)
