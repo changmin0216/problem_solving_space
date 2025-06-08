@@ -7,7 +7,6 @@ m = int(input())
 
 graph = [[] for _ in range(n+1)]
 indegree = [0] * (n+1)
-
 for _ in range(m):
     x, y, k = map(int, input().split())
     indegree[x]+=1
