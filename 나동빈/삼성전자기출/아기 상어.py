@@ -15,8 +15,10 @@ for i in range(N):
             if list_[j] == 9:
                 shark_y, shark_x = i, j
                 list_[j] = 0 ## 아기 상어 원래 위치 0으로
+
             else:
                 fish.append((i, j, list_[j]))
+
     graph.append(list_)
 
 # 상 좌 우 하
@@ -58,6 +60,7 @@ def bfs():
     if eating_cnt == shark_size:
         shark_size += 1
         eating_cnt = 0
+
     shark_y, shark_x = y, x
 
     fish.remove((y,x,graph[y][x]))
