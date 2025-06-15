@@ -48,6 +48,7 @@ def dfs(s_y, s_x, score, graph):
     ## 상어 이동
     for i in range(1, 4):
         ny, nx = s_y + dy[s_d]*i, s_x + dx[s_d]*i
+
         if 0<=ny<4 and 0<=nx<4:
             if graph[ny][nx][0]!=0:
                 dfs(ny, nx, score, deepcopy(graph))
