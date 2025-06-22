@@ -25,6 +25,7 @@ for i in range(1, n+1):
     for j in range(1, n+1):
         if graph[i][j]==INF:
             print(0, end=' ')
+
         else:
             print(graph[i][j], end=' ')
     print()
