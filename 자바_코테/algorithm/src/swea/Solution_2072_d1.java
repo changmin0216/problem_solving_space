@@ -1,9 +1,9 @@
-package ssafy;
+package swea;
 
 import java.io.*;
 import java.util.*;
 
-public class Solution_2072_d1_홀수만더하기 {
+public class Solution_2072_d1 {
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
