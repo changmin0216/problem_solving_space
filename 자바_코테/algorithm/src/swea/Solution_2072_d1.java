@@ -21,6 +21,7 @@ public class Solution_2072_d1 {
                 }
             }
             sb.append("#").append(tc + 1).append(" ").append(result).append("\n");
+
         }
         System.out.print(sb);
     }
