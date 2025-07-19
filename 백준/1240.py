@@ -16,7 +16,6 @@ def dfs(s, e, dist):
             else:
                 dfs(i, e, dist + graph[s][i])
 
-
 for i in range(N - 1):
     a, b, c = map(int, input().split())
     graph[a][b] = c
