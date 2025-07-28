@@ -6,7 +6,7 @@ import java.util.*;
 public class Solution_1961_d2 {
     static int N;
     public static void main(String[] args) throws Exception {
-        System.setIn(new FileInputStream("src/swea/res/input.txt")); //Stream은 바이트 단위로 읽는다.
+//        System.setIn(new FileInputStream("src/swea/res/input.txt")); //Stream은 바이트 단위로 읽는다.
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
