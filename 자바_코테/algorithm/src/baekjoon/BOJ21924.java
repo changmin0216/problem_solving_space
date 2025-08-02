@@ -35,6 +35,7 @@ public class BOJ21924 {
             int c = graph.get(i)[2];
 
             if (find_parent(parent, a) != find_parent(parent, b)) {
+
                 answer+=c;
                 cnt+=1;
                 union_parent(parent, a, b);
