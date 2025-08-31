@@ -12,6 +12,7 @@ public class BOJ16947 {
         input();
         checkCycle();
         getDistance();
+
     }
     static void getDistance(){
         distance = new int[n+1];
