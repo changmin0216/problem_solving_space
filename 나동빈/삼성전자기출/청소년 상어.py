@@ -27,6 +27,7 @@ def dfs(s_y, s_x, score, graph):
         for i in range(4):
             for j in range(4):
                 if graph[i][j][0] == num:
+
                     f_y, f_x = i, j
                     break
 
