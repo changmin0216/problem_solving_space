@@ -13,6 +13,7 @@ public class Solution_1289_d3 {
 
             int cnt = 0;
             char currentBit = '0';
+
             for (int i = 0; i < memory.length(); i++) {
                 if (memory.charAt(i) != currentBit) {
                     cnt += 1;

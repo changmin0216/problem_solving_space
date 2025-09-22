@@ -47,6 +47,7 @@ public class Main {
             System.out.println(map.get(j));
         }
 
+
         for (Map.Entry<String, Integer> y : map.entrySet()) {
             System.out.println(y.getKey() + y.getValue());
         }
@@ -76,7 +77,14 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.out.println(solution(")()("));
+        Map<String, Integer> map = new LinkedHashMap<>();
+
+        map.put("apple", 1);
+
+        for (String key : map.keySet()) {
+            System.out.println(map.get(key));
+        }
+        
     }
 
 }
