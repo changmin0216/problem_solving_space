@@ -29,6 +29,7 @@ public class Solution_5215_d3 {
                 cal[i] = Integer.parseInt(st.nextToken());
             }
             result = 0;
+
             dfs(0, 0, 0);
             sb.append("#").append(tc).append(" ").append(result).append("\n");
         }
